@@ -145,6 +145,34 @@ Los tokens SPL son el estándar de tokens en Solana, similares a ERC-20 en Ether
 
     `spl-token transfer  --fund-recipient <TOKEN_ADDRESS> <CANTIDAD> <DIRECCIÓN_DESTINO>`
 
+
+### Token con Metadata
+
+- Para crear un token con metadatos directamente desde el CLI se debe llamar específicamente al Programa de Tokens con extensiones:
+
+    `spl-token create-token --program-id TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb  --enable-metadata`
+
+- Es necesario crear los metadatos fuera de Solana para nuestro token, dentro de un archivo JSON accesible públicamente. Estos datos se muestran en sitios como Solana Explorer cuando las personas consultan la dirección del token.
+
+    ```json
+    {
+    	  "name": "Mi Token",
+    	  "symbol": "MITOKEN",
+    	  "description": "Ejemplo de token con metadatos",
+    	  "image": "https://raw.githubusercontent.com/solana-developers/opos-asset/main/assets/CompressedCoil/image.png"
+    }
+    ```
+	La imagen debe ser cuadrada, de 512 x 512 o 1024 x 1024 píxeles y, si es posible, de menos de 100 kb.
+
+- Este archivo metadata.json debe estar almacenado en un dominio de acceso público, por ejemplo:
+
+    `https://raw.githubusercontent.com/solana-developers/opos-asset/main/assets/CompressedCoil/metadata.json`
+
+- Agregar los metadatos al token:
+
+    `spl-token initialize-metadata <DIRECCIÓN_TOKEN> 'Mi Token' 'MITOKEN' https://raw.githubusercontent.com/solana-developers/opos-asset/main/assets/CompressedCoil/metadata.json`
+  
+
 ### Crear un Token no Fungible (NFT)
 
 - Crea un nuevo token especificando los decimales en 0:
@@ -175,7 +203,7 @@ Los tokens SPL son el estándar de tokens en Solana, similares a ERC-20 en Ether
 
 ### Quemar Tokens
 
-- Si deseas eliminar tokens de circulación:
+- Para eliminar tokens de circulación:
 
     `spl-token burn <CUENTA_DEL_TOKEN> <CANTIDAD>`
 
