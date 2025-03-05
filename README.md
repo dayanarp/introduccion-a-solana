@@ -134,13 +134,48 @@ Los tokens SPL son el estándar de tokens en Solana, similares a ERC-20 en Ether
 
     `spl-token supply <DIRECCIÓN_TOKEN>`
 
+
 ### Transferir Tokens a otra cuenta
 
 - Para enviar tokens a otro usuario:
 
     `spl-token transfer <DIRECCIÓN_TOKEN> <CANTIDAD> <DIRECCIÓN_DESTINO>`
 
-- Si la cuenta de destino no tiene una cuenta de token asociada, agrégale *--fund-recipient*:
+- Si la cuenta de destino no tiene una cuenta de token asociada, agrégale* --fund-recipient*:
 
     `spl-token transfer  --fund-recipient <TOKEN_ADDRESS> <CANTIDAD> <DIRECCIÓN_DESTINO>`
+
+### Crear un Token no Fungible (NFT)
+
+- Crea un nuevo token especificando los decimales en 0:
+
+    `spl-token create-token --decimals 0`
+
+- Imprime (mintea) una única unidad del token:
+
+    `spl-token mint <DIRECCIÓN_TOKEN> 1 <CUENTA_TOKEN>`
+
+- Desabilita la emisión de más tokens en el futuro:
+
+    `spl-token authorize <DIRECCIÓN_TOKEN> mint --disable`
+
+### Congelando cuentas Token
+
+- Si deseas poder congelar cuentas en caso de uso indebido, al crear el token, agrega *--enable-freeze*:
+
+    `spl-token create-token --enable-freeze`
+
+- Congelar una cuenta específica:
+
+    `spl-token freeze <DIRECCIÓN_TOKEN> <CUENTA_DEL_USUARIO>`
+
+- Descongelar una cuenta:
+
+    `spl-token thaw <DIRECCIÓN_TOKEN> <CUENTA_DEL_USUARIO>`
+
+### Quemar Tokens
+
+- Si deseas eliminar tokens de circulación:
+
+    `spl-token burn <CUENTA_DEL_TOKEN> <CANTIDAD>`
 
