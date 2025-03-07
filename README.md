@@ -8,18 +8,20 @@ Guía básica para navegar los conceptos fundamentales de Solana usando su CLI (
 Antes de empezar, necesitas instalar el CLI de Solana y configurar tu entorno.
 
 ### Instalar el CLI
-- Abre tu terminal y ejecuta el siguiente comando para instalar el CLI en sistemas basados en Unix (Linux/MacOS), para Windows, puedes usar WSL (Windows Subsystem for Linux):
+- Abre tu terminal y ejecuta el siguiente comando para instalar el CLI en sistemas basados en Unix (Linux/MacOS), para Windows, puedes usar WSL (Windows Subsystem for Linux) (para más información puedes leer la guía de instalación en https://solana.com/docs/intro/installation):
 
-    `sh -c "$(curl -sSfL https://release.solana.com/stable/install)"`
+    `sh -c "$(curl -sSfL https://release.anza.xyz/stable/install)"`
 
 - Verifica la instalación:
 
     `solana --version`
 
 ### Configurar el entorno
-- Configura el CLI para usar una red específica (mainnet, testnet o devnet). Para desarrollo, usaremos devnet:
+- Configura el CLI para usar una red específica (mainnet, testnet o devnet). Para desarrollo, usaremos el validador local y luego la red devnet:
 
-    `solana config set --url https://api.devnet.solana.com`
+    `solana config set --url localhost`
+
+  `solana config set --url devnet`
 
 - Verifica la configuración:
 
@@ -31,6 +33,8 @@ Antes de empezar, necesitas instalar el CLI de Solana y configurar tu entorno.
     `solana-keygen new`
 
     Esto creará un archivo JSON en *~/.config/solana/id.json* por defecto, con la clave privada y pública. **Guárdalo en un lugar seguro.**
+
+- Crear una "Vanity address
 
 - Si ya tienes un archivo JSON con una clave privada, puedes importarla:
 
@@ -84,9 +88,13 @@ En Solana, las "cuentas" son fundamentales: almacenan datos, tokens o programas.
 
    ` solana transaction-history <DIRECCIÓN_PÚBLICA>`
 
-- Ver detalles de una transacción específica:
+- Ver estado de una transacción específica:
 
     `solana confirm <ID_DE_TRANSACCIÓN>`
+
+- Para ver los detalles de la transacción agrega *-v* al comando anterior:
+
+    `solana confirm -v <ID_DE_TRANSACCIÓN>`  
 
 - Explorar el estado de la red:
 
@@ -150,7 +158,10 @@ Los tokens SPL son el estándar de tokens en Solana, similares a ERC-20 en Ether
 
 - Para crear un token con metadatos directamente desde el CLI se debe llamar específicamente al Programa de Tokens con extensiones:
 
-    `spl-token create-token --program-id TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb  --enable-metadata`
+   `spl-token create-token --program-2022  --enable-metadata`
+  
+     `spl-token create-token --program-id TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb  --enable-metadata`
+  
 
 - Es necesario crear los metadatos fuera de Solana para nuestro token, dentro de un archivo JSON accesible públicamente. Estos datos se muestran en sitios como Solana Explorer cuando las personas consultan la dirección del token.
 
@@ -166,7 +177,7 @@ Los tokens SPL son el estándar de tokens en Solana, similares a ERC-20 en Ether
 
 - Este archivo metadata.json debe estar almacenado en un dominio de acceso público, por ejemplo:
 
-    `https://raw.githubusercontent.com/solana-developers/opos-asset/main/assets/CompressedCoil/metadata.json`
+    https://raw.githubusercontent.com/solana-developers/opos-asset/main/assets/CompressedCoil/metadata.json
 
 - Agregar los metadatos al token:
 
