@@ -34,7 +34,9 @@ Antes de empezar, necesitas instalar el CLI de Solana y configurar tu entorno.
 
     Esto creará un archivo JSON en *~/.config/solana/id.json* por defecto, con la clave privada y pública. **Guárdalo en un lugar seguro.**
 
-- Crear una "Vanity address
+- Crear una "Vanity address":
+
+    `solana-keygen grind [OPCIONES]`
 
 - Si ya tienes un archivo JSON con una clave privada, puedes importarla:
 
